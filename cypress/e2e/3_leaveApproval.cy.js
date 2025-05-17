@@ -37,7 +37,7 @@ describe('Employee Leave Approval Flow - OrangeHRM', function() {
         cy.screenshot('leaveApprove_Request-positive');
     });
 
-    it('Leave Approval from Admin', function() {
+    it.only('Leave Approval from Admin', function() {
         cy.get('[name="username"]').type('Admin');
         cy.get('[name="password"]').type('admin123');
         cy.get('button[type="submit"]').click();
@@ -50,12 +50,10 @@ describe('Employee Leave Approval Flow - OrangeHRM', function() {
         cy.wait(2000);
         cy.scrollTo('bottom');
 
-        // cy.xpath('//button[contains(@class, "oxd-button--label-success") and normalize-space(.)="Approve"]')
-        cy.xpath('//div[contains(@class, "oxd-table-row")][.//div[contains(@class, "data") and normalize-space(text())="Putri  Anne"]]//button[contains(@class, "oxd-button--label-success")]')
+        cy.xpath('//button[contains(@class, "oxd-button--label-success") and normalize-space(.)="Approve"]')
         .click({ force: true });
 
         cy.screenshot('leaveApprove_Approval-positive');
-
     });
 
     it('Leave Approve Data Checking', function() {
@@ -73,6 +71,7 @@ describe('Employee Leave Approval Flow - OrangeHRM', function() {
         cy.contains('Pending Approval')
         .should('be.visible');
         
+        cy.wait(2000);
         cy.screenshot('leaveApprove_Check-positive');
     });
 
